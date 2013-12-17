@@ -1,8 +1,13 @@
 #!/bin/bash
 
 ##  -------------------------------------------------------------------------------
-##  If you've downloaded the roster as an excel file and entered the grades there, this script will create formatted files for each lab to allow uploading to MyUCLA.
-##  This script takes a somewhat special "Workbook1.txt" as argument: You can create it by copying the gradebook body into a new excel file and deleting the three adjacent columns containing students' e-mail, major and section as they will not be required. Save as a tab-delimited text file "Workbook1.txt" and move to the same directory as this script. The first line should be of the format: UID <tab> "Joe Bruin" <tab> # <tab> # etc.
+##  If you've downloaded the roster as an excel file and entered the grades there, this 
+##  script will create formatted files for each lab to allow uploading to MyUCLA.
+##  This script takes a somewhat special "Workbook1.txt" as argument: You can create it 
+##  by copying the gradebook body into a new excel file and deleting the three adjacent 
+##  columns containing students' e-mail, major and section as they will not be required. 
+##  Save as a tab-delimited text file "Workbook1.txt" and move to the same directory as 
+##  this script. The first line should be of the format: UID <tab> "Joe Bruin" <tab> # 
 ##  Run this script from a Unix command line, "IP:Directory user$ bash this_script.sh"
 ##  For the nth Lab on MyUCLA, upload (n-1).txt
 ##  -------------------------------------------------------------------------------
