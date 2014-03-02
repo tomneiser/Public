@@ -1,20 +1,20 @@
 #!/bin/bash
 
 ##  -------------------------------------------------------------------------------
-##  If you've downloaded the roster as an excel file and entered the grades there, this
+##  If you've downloaded the roster and entered the grades in an excel file, this
 ##  script will create formatted files for each lab or HW to allow uploading to MyUCLA.
-##  This script takes a somewhat special "Roster.txt" as argument: You can create it
+##  This script takes a somewhat special "Filename.txt" as argument: You can create it
 ##  by copying the gradebook body into a new excel file and deleting the three adjacent
-##  columns containing students' e-mail, major and section as they will not be required.
-##  Save as a tab-delimited text file "Roster.txt" and move to the same directory as
-##  this script. The first line will be of the format: UID <tab> "Joe Bruin" <tab> # etc.
+##  columns containing students' e-mail, major and section and the first row.
+##  Save as a tab-delimited text file "Filename.txt" and move to the same directory as
+##  this script. The lines will be of the format: UID <tab> "Joe Bruin" <tab> # etc.
 ##  Run this script from a Unix command line, "IP:Directory user$ bash this_script.sh"
 ##  -------------------------------------------------------------------------------
 
 OLD_IFS="$IFS"                              # secure default IFS
 
 rm -f grades.txt                            # remove previous versions of grades.txt
-cp -f Roster.txt grades.txt              # copy Workbook1 for manipulation
+cp -f Filename.txt grades.txt              # copy Workbook1 for manipulation
 
 IFS=$'\t\r\n' roster=($(cat grades.txt))    # create array while ignoring spaces
 
