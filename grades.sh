@@ -3,19 +3,18 @@
 ##  -------------------------------------------------------------------------------
 ##  If you've downloaded the roster as an excel file and entered the grades there, this
 ##  script will create formatted files for each lab or HW to allow uploading to MyUCLA.
-##  This script takes a somewhat special "Workbook1.txt" as argument: You can create it
+##  This script takes a somewhat special "Roster.txt" as argument: You can create it
 ##  by copying the gradebook body into a new excel file and deleting the three adjacent
 ##  columns containing students' e-mail, major and section as they will not be required.
-##  Save as a tab-delimited text file "Workbook1.txt" and move to the same directory as
+##  Save as a tab-delimited text file "Roster.txt" and move to the same directory as
 ##  this script. The first line will be of the format: UID <tab> "Joe Bruin" <tab> # etc.
 ##  Run this script from a Unix command line, "IP:Directory user$ bash this_script.sh"
-##  For the nth Lab or HW on MyUCLA, upload (n-1).txt
 ##  -------------------------------------------------------------------------------
 
 OLD_IFS="$IFS"                              # secure default IFS
 
 rm -f grades.txt                            # remove previous versions of grades.txt
-cp -f Workbook1.txt grades.txt              # copy Workbook1 for manipulation
+cp -f Roster.txt grades.txt              # copy Workbook1 for manipulation
 
 IFS=$'\t\r\n' roster=($(cat grades.txt))    # create array while ignoring spaces
 
@@ -41,12 +40,16 @@ for ((n=0; n< $students; ++n)); do
 echo ${roster[0+$n*($c)]} ${roster[1+$n*($c)]} ${roster[2+$i+$n*($c)]} >> temp1.txt
 done
 
-sed -e '/^$/d' temp1.txt > temp2.txt    # remove empty lines
-sed -e 's/\"/	/g' temp2.txt > $i.txt  # replace quotes by tabs, bundle grades into file
+#Note: Create tab separated file with Excel, where names are in quotation marks
+sed -e '/^$/d' temp1.txt > temp2.txt # remove empty lines
+sed -e 's/\"/       /g' temp2.txt > temp3.txt # replace all quotes by spaces
 
-rm -f temp1.txt                         # clear temp files for reuse
+t=$(($i + 1))
+unexpand -a temp3.txt > lab_$t.txt  #convert instances of two or more spaces to tabs and bundle grades into file
+
+rm -f temp1.txt # clear temp files as good practice
 rm -f temp2.txt
-
+rm -f temp3.txt
 done
 
 IFS="$OLD_IFS"                          # return IFS to default value
